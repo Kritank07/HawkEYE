@@ -17,3 +17,6 @@ def main():
 
         case None:
             home_screen()
+
+if __name__ == "__main__":
+    main()

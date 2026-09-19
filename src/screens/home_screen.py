@@ -13,16 +13,15 @@ def home_screen():
     with col1:
         st.header("I ' m Student")
         st.image("https://res.cloudinary.com/hunglbma/image/upload/v1789132966/mascot-student.png", width=120)
-        if st.button('Student Portal', type='primary', icon=':material/arrow_outward:', icon_position='right'):
+        if st.button("Student's Portal", type='primary', icon=':material/arrow_outward:', icon_position='right'):
             st.session_state['login_type']='student'
             st.rerun()
 
     with col2:
         st.header("I ' m Teacher")
         st.image("https://res.cloudinary.com/hunglbma/image/upload/v1789132986/mascot-prof.png", width=145)
-        if st.button('Teacher Portal', type='primary', icon=':material/arrow_outward:', icon_position='right'):
+        if st.button("Teacher's Portal", type='primary', icon=':material/arrow_outward:', icon_position='right'):
             st.session_state['login_type']='teacher'
             st.rerun()
 
     footer_home()
-home_screen()
