@@ -6,7 +6,7 @@ import streamlit as st
 
 @st.cache_resource
 def load_voice_encoder():
-    return VoiceEncoder
+    return VoiceEncoder()
 
 def get_voice_embedding(audio_bytes):
     try:
@@ -17,13 +17,13 @@ def get_voice_embedding(audio_bytes):
         wav = preprocess_wav(audio) #Now all the noice of the audio is removed
         embedding = encoder.embed_utterance(wav)
 
-        return embedding.toList()
+        return embedding.tolist()
     except Exception as e:
         st.error("Voice recog error")
         return None
 
 def identify_speaker(new_embedding, candidates_dict, threshold = 0.65):
-    if new_embedding or None or not candidates_dict:
+    if new_embedding is None or not candidates_dict:
         return None, 0.0
 
     best_sid = None
@@ -45,10 +45,10 @@ def identify_speaker(new_embedding, candidates_dict, threshold = 0.65):
 def process_bulk_audio(audio_bytes, candidates_dict, threshold = 0.65):
     try:
         encoder = load_voice_encoder()
-        audio, sr = librosa.load(io.BytesIo(audio_bytes), sr = 16000)
+        audio, sr = librosa.load(io.BytesIO(audio_bytes), sr = 16000)
         segments = librosa.effects.split(audio, top_db = 30)
 
-        identify_results = []
+        identify_results = {}
 
         for start, end in segments:
             if(end-start) < sr*0.5:  # To remove noise or useless voice or whispers
@@ -62,7 +62,7 @@ def process_bulk_audio(audio_bytes, candidates_dict, threshold = 0.65):
             sid, score = identify_speaker(embedding, candidates_dict, threshold)
 
             if sid:
-                if sid not in identify_speaker or score > identify_results[sid]:
+                if sid not in identify_results or score > identify_results[sid]:
                     identify_results[sid] = score
 
         return identify_results

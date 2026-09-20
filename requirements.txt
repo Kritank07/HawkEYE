@@ -1,3 +1,4 @@
+streamlit #for web app
 numpy
 pandas
 scikit-learn
@@ -11,8 +12,6 @@ bcrypt #for password hashing
 
 segno #to generate QR codes
 pillow #for image preprocessing very important
-
-streamlit #for web app
 
 librosa
 resemblyzer
