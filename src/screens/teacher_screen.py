@@ -153,7 +153,7 @@ def teacher_tab_take_attendance():
 
                     for node in enrolled_students:
                         student = node['students']
-                        sources = all_detected_ids.get(int(student['student_id'])) #Which person came from which photo
+                        sources = all_detected_ids.get(int(student['student_id']), []) #Which person came from which photo
 
                         is_present = len(sources) > 0
                         results.append({
