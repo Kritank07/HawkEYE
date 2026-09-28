@@ -105,6 +105,36 @@ def style_base_layout():
                 padding-top:1.5rem !important;    
             }
 
+            /* Dialogs are rendered outside .stApp, so give them paired colors. */
+            [data-testid="stDialog"] [role="dialog"] {
+                background-color: #FFFFFF !important;
+                color: #102A43 !important;
+                color-scheme: light;
+            }
+
+            [data-testid="stDialog"] [data-baseweb="input"],
+            [data-testid="stDialog"] [data-baseweb="base-input"],
+            [data-testid="stDialog"] input,
+            [data-testid="stDialog"] textarea {
+                background-color: #EAF2FF !important;
+                color: #102A43 !important;
+                caret-color: #102A43 !important;
+            }
+
+            [data-testid="stDialog"] [data-testid="InputInstructions"],
+            [data-testid="stDialog"] input::placeholder,
+            [data-testid="stDialog"] textarea::placeholder {
+                color: #66788A !important;
+                opacity: 1 !important;
+            }
+
+            /* Global button padding must not squeeze the modal's close icon. */
+            [data-testid="stDialog"] button[aria-label="Close"] {
+                padding: 0 !important;
+                width: 2.5rem !important;
+                height: 2.5rem !important;
+            }
+
             h1 {
                 font-family: 'Climate Crisis', sans-serif !important;
                 font-size: 3.5rem !important;
